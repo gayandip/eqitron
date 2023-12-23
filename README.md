@@ -1,0 +1,2 @@
+# eqitron
+New freedom calculator
