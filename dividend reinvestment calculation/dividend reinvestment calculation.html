@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <title>Calculator</title>
+    
+    <style>
+       .odec{
+            margin:auto;
+            padding:8px;
+            background-color: #fffbd4;
+            font-family:serif;
+        }
+        .dec{
+            padding:4px;
+            margin:auto;
+        }
+        input, button {
+           margin:5px;
+           padding:3px;
+        }
+        
+    </style>   
+    </head>
+
+    <body>
+    <div class="odec">
+       <div class="dec">
+       <h3>Dividend Reinvestment Calculator</h3>
+       
+        Current Portfolio&nbsp;<input type="number" name="name" id="v1" value="" /> <br>
+        
+        SIP per month&nbsp;<input type="number" name="name" id="v2" value="0" /> <br>
+        
+        Expected growth (%)&nbsp;<input type="number" name="name" id="v3" value="" /> <br>
+        
+        Time (years)&nbsp;<input type="number" name="name" id="v4" value="" /> <br>
+        
+        Dividend yield(%)&nbsp;<input type="number" name="name" id="v5" value="0" /> <br>
+        
+        <textarea id="show" name="name" rows="7" cols="56" readonly> </textarea>
+        <br>
+        
+         <button onclick="calc()">Calculate</button>
+         </div>
+         </div>
+    </body>
+
+<script>
+ function calc()
+{
+   let p = document.getElementById('v1').value;
+   let sip = document.getElementById('v2').value;
+   let r = document.getElementById('v3').value;
+   let y = document.getElementById('v4').value;
+   let dyei = document.getElementById('v5').value;
+   
+    
+   p=parseFloat(p);
+   sip=parseFloat(sip);
+   r=parseFloat(r);
+   y=parseFloat(y);
+   dyei=parseFloat(dyei);
+   
+
+
+   let sr = r/1200;
+   r = 1+(r/100);
+   let sy = y*12;
+ 
+ // function for dividend calculation
+ 
+   function divi(nu){
+       nu*=(dyei/100);
+       if(nu<0.01){
+           return 0;
+       }
+       return nu;
+   }
+    
+   let f = p;
+   let b=Math.pow(r,y);
+   
+   p *= b;
+  
+  //sip calculation
+  
+  let sf=Math.pow((1+sr),sy);
+   sf =((sf-1)/sr);
+ 
+   let us = sf;
+   sf = (sf*sip)*(1+sr);
+  
+  //adding sip with portfolio
+  
+  p+=sf;
+  
+  let p1 = p;
+  
+  //dividend calculation
+    let fu = 0;
+    {
+        let l=1,m=0; 
+       while(l<=y){
+           if(l==1){
+             f = divi(f);
+             fu=f;
+           }
+           else{
+             m = divi(fu); 
+             fu*=r;
+             fu+=m;
+             f*=r;
+             fu+=f;
+           }  
+           l++;
+       }
+    }
+  
+    let sfu = 0;
+    {    //sip
+        let l=1,km=0,eff=0;
+        while(l<=y){
+            sfu*=r;
+            sfu += divi(eff);
+            sfu += divi(km);
+            km = Math.pow((1+sr),(l*12));
+            km =((km-1)/sr);
+            km = (km*sip)*(1+sr);
+            eff = sfu;
+            l++;
+        }
+    }
+  
+    fu+=sfu;
+  
+   //adding dividend with portfolio
+   p+=fu;
+  
+  
+  function conv(num,text){
+      if(num>=100000 && num<10000000){
+      num/=100000;
+     return text+y.toString()+" years: "+num.toFixed(2).toString()+" lakh"+"\n";
+  }
+  else if(num>=10000000){
+      num/=10000000;
+      return text+y.toString()+" years: "+num.toFixed(2).toString()+" crore"+"\n";
+  }
+  else if(num>=1000){
+      num/=1000;
+      return text+y.toString()+" years: "+num.toFixed(2).toString()+" k"+"\n";
+  }
+  else{
+      return text+y.toString()+" years: "+num.toFixed(2).toString()+" Rs."+"\n";
+  }
+  }
+  
+  let str ="";
+  let temp = conv(p1,"Investment value after ");
+  str+=temp+"\n";
+  temp = conv(fu,"Total dividend value after ");
+  str +=temp+"\n";
+  temp = conv(p,"Total portfolio value after ");
+  str +=temp+"\n";
+  
+  
+   document.getElementById('show').value = str;
+}
+</script>
+
+</html>
