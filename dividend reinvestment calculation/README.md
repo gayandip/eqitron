@@ -1,1 +1,1 @@
-## Dividend Reinvestment Calculation
+# Dividend Reinvestment Calculation
