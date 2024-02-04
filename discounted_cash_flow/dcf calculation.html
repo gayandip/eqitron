@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <title>Free Cash Flow</title>
+    
+    <style>
+        .first{ 
+            padding: 7px;
+             }
+         .header{
+            width:98%;
+            height:27px;
+            background:violet;
+            margin-bottom:6px;
+            margin-left:-2px;
+            padding:6px 7px;
+            color:white;
+            font-weight:600;
+            font-size:26px;
+            }
+        .second{
+             text-align:center;
+             font-size:18px;
+         }
+         .third{
+             margin-top:2px;
+             display:flex;
+             padding-left:4px;
+             font-size:16px;
+             font-family:serif;
+             border-radius:6px;
+         }
+         .fourth{
+             margin-top:50px;
+             text-align:center;
+             padding-top:10px;
+             }
+         .t1{
+             margin-right:1px;
+             padding-top:5px;
+         }
+         .t2{
+             text-align:center;
+             padding:15px;   
+            }
+          input{
+              width:150px;
+              height:23px;
+              padding:4px;
+              display: block;
+              margin-top: 7px;
+              border:none;
+              background-color: #D5FFFA;
+              font-size:14px;
+              color:#071443;
+              font-family:serif;
+          }
+          .t2 input{
+              margin:auto;
+              color:#33A537;
+          }
+          .second h4{
+             font-family:serif;
+             font-weight:600;
+          }
+    </style>
+    
+    </head>
+
+    <body>
+       <header>
+       <div class="header">
+        Hello! Welcome...
+       </div>
+       </header>
+      
+       <section>
+       <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate The Intrinsic Value (DCF)<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current FCF&nbsp;<input type="number" name="name" id="v1" value="" /> <br/>
+        Expected FCF Growth Rate(%)&nbsp;<input type="number" name="name" id="v2" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="v3" value="5" /> <br/>
+        Expected Return Rate(%)&nbsp;<input type="number" name="name" id="v4" value="15" /> <br/>
+        FCF M-Cap Multiple&nbsp;<input type="number" name="name" id="v5" value="" /> <br/>
+        Current Profit&nbsp;<input type="number" name="name" id="v6" value="" /> <br/>
+       Current EPS&nbsp;<input type="number" name="name" id="v7" value="" /> <br/>
+        
+          </div>
+          <div class="t2" style="margin-left:20px;">
+        <div style="padding-top:30px; font-size:12px;">Discounted Cash flow<br/><input type="number" name="name" id="show1" readonly=() />
+         </div> 
+         <div style="padding-top:30px; font-size:11px;">Actual Company M-Cap Value<br/><input type="number" name="name" id="show2" readonly=() />
+         </div>
+         <div style="padding-top:30px; font-size:12px;">Intrinsic Value Per Share(RS)<br/><input type="number" name="name" id="show3" style="font-weight:550;" readonly=() />
+         </div>
+          <div class="fourth">
+         <button onclick="calc()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         
+         </div>
+         
+        
+         
+        </div>
+        </section>
+        
+        <hr style="border: 1px dashed green;">
+        
+    <section style="margin-top:5px;">
+    <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate The Price For Expected Returns<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current Profit/EPS&nbsp;<input type="number" name="name" id="v8" value="" /> <br/>
+        Expected Growth Rate(%)&nbsp;<input type="number" name="name" id="v9" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="v10" value="5" /> <br/>
+        Expected Return Rate(%)&nbsp;<input type="number" name="name" id="v11" value="15" /> <br/>
+        Expected PE Multiple&nbsp;<input type="number" name="name" id="v12" value="" /> <br/>
+        
+          </div>
+          <div class="t2" style="margin-left:50px;">
+        <div style="padding-top:30px; font-size:12px;">Discounted Profit/EPS<br/><input type="number" name="name" id="show4" readonly=() />
+         </div> 
+         <div style="padding-top:30px; font-size:11px;">Discounted Share Price<br/><input type="number" name="name" id="show5" style="font-weight:550;" readonly=() />
+         </div>
+         <div class="fourth">
+         <button onclick="cal()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         </div>
+         
+         
+         
+        </div>
+    </section>  
+       </section>  
+    </body>
+
+<script>
+ function calc()
+{
+   var fcf = document.getElementById('v1').value;
+   var fg = document.getElementById('v2').value;
+   var y = document.getElementById('v3').value;
+   var r = document.getElementById('v4').value;
+   var m = document.getElementById('v5').value;
+   var p = document.getElementById('v6').value;
+   var eps = document.getElementById('v7').value;
+   
+   fcf=parseFloat(fcf);
+   fg=parseFloat(fg);
+   y=parseFloat(y);
+   r=parseFloat(r);
+   m=parseFloat(m);
+   p=parseFloat(p);
+   eps=parseFloat(eps);
+
+  var sh=p/eps;
+  fg=fg/100;
+  r=r/100;
+  var i=1;
+  var n=0;
+  
+   while(i<=y)
+    {   fcf=(fcf*(1+fg));
+        u=fcf/Math.pow((1+r),i);
+        n=n+u;
+        i++;
+      var mct=fcf*m;
+    }
+    
+  var b=mct/Math.pow((1+r),y);
+  var k=b+n;
+  var sp=k/sh;
+  
+   document.getElementById('show1').value = n.toFixed(2);
+   document.getElementById('show2').value = k.toFixed(2);
+   document.getElementById('show3').value = sp.toFixed(2);
+   
+}
+function cal()
+{  var p = document.getElementById('v8').value;
+   var g = document.getElementById('v9').value;
+   var y = document.getElementById('v10').value;
+   var r = document.getElementById('v11').value;
+   var m = document.getElementById('v12').value;
+  
+   p=parseFloat(p);
+   g=parseFloat(g);
+   y=parseFloat(y);
+   r=parseFloat(r);
+   m=parseFloat(m);
+   
+   g=g/100;
+   r=r/100;
+
+    p = p*Math.pow((1+g),y);
+    
+    p=p/Math.pow((1+r),y);
+    
+   document.getElementById('show4').value = p.toFixed(2);
+   document.getElementById('show5').value = (p*m).toFixed(2);
+}
+</script>
+
+</html>
