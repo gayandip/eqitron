@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <title>Free Cash Flow</title>
+    
+    <style>
+        .first{ 
+            padding: 7px;
+             }
+         .header{
+            width:98%;
+            height:27px;
+            background:violet;
+            margin-bottom:6px;
+            margin-left:-2px;
+            padding:6px 7px;
+            color:white;
+            font-weight:600;
+            font-size:26px;
+            }
+        .second{
+             text-align:center;
+             font-size:18px;
+         }
+         .third{
+             margin-top:2px;
+             display:flex;
+             padding-left:4px;
+             font-size:16px;
+             font-family:serif;
+             border-radius:6px;
+         }
+         .fourth{
+             margin-top:50px;
+             text-align:center;
+             padding-top:10px;
+             }
+         .t1{
+             margin-right:1px;
+             padding-top:5px;
+         }
+         .t2{
+             text-align:center;
+             padding:15px;   
+            }
+          input{
+              width:150px;
+              height:23px;
+              padding:4px;
+              display: block;
+              margin-top: 7px;
+              border:none;
+              background-color: #D5FFFA;
+              font-size:14px;
+              color:#071443;
+              font-family:serif;
+          }
+          .t2 input{
+              margin:auto;
+              color:#33A537;
+          }
+          .second h4{
+             font-family:serif;
+             font-weight:600;
+          }
+    </style>
+    
+    </head>
+
+    <body>
+       <header>
+       <div class="header">
+        Hello! Welcome...
+       </div>
+       </header>
+      
+        <section>
+       <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate The Intrinsic Value (DCF)<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current FCF&nbsp;<input type="number" name="name" id="fv1" value="" /> <br/>
+        Expected FCF Growth Rate(%)&nbsp;<input type="number" name="name" id="fv2" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="fv3" value="5" /> <br/>
+        Expected Return Rate(%)&nbsp;<input type="number" name="name" id="fv4" value="15" /> <br/>
+        FCF M-Cap Multiple&nbsp;<input type="number" name="name" id="fv5" value="" /> <br/>
+        Current Profit&nbsp;<input type="number" name="name" id="fv6" value="" /> <br/>
+       Current EPS&nbsp;<input type="number" name="name" id="fv7" value="" /> <br/>
+        
+          </div>
+          <div class="t2" style="margin-left:20px;">
+        <div style="padding-top:30px; font-size:12px;">Discounted Cash flow<br/><input type="number" name="name" id="fshow1" readonly=() />
+         </div> 
+         <div style="padding-top:30px; font-size:11px;">Actual Company M-Cap Value<br/><input type="number" name="name" id="fshow2" readonly=() />
+         </div>
+         <div style="padding-top:30px; font-size:12px;">Intrinsic Value Per Share(RS)<br/><input type="number" name="name" id="fshow3" style="font-weight:550;" readonly=() />
+         </div>
+          <div class="fourth">
+         <button onclick="fcalc()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         
+         </div>
+         
+        </div>
+        </section>
+      
+       <hr style="border: 1px dashed green;">
+      
+       <section>
+       <div class="first">
+
+         <div class="second">
+            
+            <h4 style="margin:11px;">Calculate The Price Based on Future Profit<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Future Profit&nbsp;<input type="number" name="name" id="sv1" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="sv2" value="5" /> <br/>
+        Expected Return Rate(%)&nbsp;<input type="number" name="name" id="sv3" value="15" /> <br/>
+        Future PE&nbsp;<input type="number" name="name" id="sv4" value="" /> <br/>
+        Current Quarterly Profit&nbsp;<input type="number" name="name" id="sv5" value="" /> <br/>
+       Current EPS&nbsp;<input type="number" name="name" id="sv6" value="" /> <br/>
+          </div>
+
+
+          <div class="t2" style="margin-left:20px;">
+        <div style="padding-top:30px; font-size:12px;">Per share price<br/><input type="number" name="name" id="sshow1" readonly=() />
+         </div> 
+         
+              
+          <div class="fourth">
+         <button onclick="scalc()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         
+         </div>
+         
+        </div>
+        </section>
+        
+        <hr style="border: 1px dashed green;">
+        
+    <section style="margin-top:5px;">
+    <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate CAGR<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current Profit&nbsp;<input type="number" name="name" id="c1" value="" /> <br/>
+        Future Profit&nbsp;<input type="number" name="name" id="c2" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="c3" value="5" /> <br/>       
+          </div>
+          
+          <div class="t2" style="margin-left:50px;">
+        
+         <div style="padding-top:30px; font-size:11px;">CAGR<br/><input type="number" name="name" id="cdshow" style="font-weight:550;" readonly=() />
+         </div>
+         <div class="fourth">
+         <button onclick="cdal2()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         </div>
+         
+         
+         
+        </div>
+    </section>  
+    
+    
+       <hr style="border: 1px dashed green;">
+        
+    <section style="margin-top:5px;">
+    <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate EPS on current No.of Shares<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current Total Profit&nbsp;<input type="number" name="name" id="ep1" value="" /> <br/>
+        Current Quarter Profit&nbsp;<input type="number" name="name" id="ep2" value="" /> <br/>
+        EPS&nbsp;<input type="number" name="name" id="ep3" value="" /> <br/>       
+          </div>
+          
+          <div class="t2" style="margin-left:50px;">
+        
+         <div style="padding-top:30px; font-size:11px;">EPS<br/><input type="number" name="name" id="epshow" style="font-weight:550;" readonly=() />
+         </div>
+         <div class="fourth">
+         <button onclick="caleps()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         </div>     
+         
+        </div>
+    </section>  
+    
+    
+        
+        <hr style="border: 1px dashed green;">
+     
+       <section>
+       <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate required earnings growth<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Price&nbsp;<input type="number" name="name" id="lv1" value="" /> <br/>
+        PE&nbsp;<input type="number" name="name" id="lv2" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="lv3" value="5" /> <br/>
+        EPS&nbsp;<input type="number" name="name" id="lv4" value="" /> <br/>
+        Expected return&nbsp;<input type="number" name="name" id="lv5" value="" /> <br/>
+        
+        
+          </div>
+          <div class="t2" style="margin-left:20px;">
+        <div style="padding-top:30px; font-size:12px;">Earning growth needed (%)<br/><input type="number" name="name" id="lshow1" readonly=() />
+         </div> 
+         
+          <div class="fourth">
+         <button onclick="lcalc()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         
+         </div>
+         
+        
+         
+        </div>
+        </section>
+        
+        <hr style="border: 1px dashed green;">
+        
+    <section style="margin-top:5px;">
+    <div class="first">
+
+         <div class="second">
+            <h4 style="margin:11px;">Calculate The Price For Expected Returns<hr></h4>
+         </div>
+         
+         <div class="third">
+          
+          <div class="t1">
+        Current Profit/EPS&nbsp;<input type="number" name="name" id="tv8" value="" /> <br/>
+        Expected Growth Rate(%)&nbsp;<input type="number" name="name" id="tv9" value="" /> <br/>
+        Time(Years)&nbsp;<input type="number" name="name" id="tv10" value="5" /> <br/>
+        Expected Return Rate(%)&nbsp;<input type="number" name="name" id="tv11" value="15" /> <br/>
+        Expected PE Multiple&nbsp;<input type="number" name="name" id="tv12" value="" /> <br/>
+        
+          </div>
+          <div class="t2" style="margin-left:50px;">
+        <div style="padding-top:30px; font-size:12px;">Discounted Profit/EPS<br/><input type="number" name="name" id="tshow4" readonly=() />
+         </div> 
+         <div style="padding-top:30px; font-size:11px;">Discounted Share Price<br/><input type="number" name="name" id="tshow5" style="font-weight:550;" readonly=() />
+         </div>
+         <div class="fourth">
+         <button onclick="tcal()" style=" height:25px; width:120px; background:rgba(250,250,250,0.9); color:green; border-radius:30px; border:1px dashed blue; font-family:serif; cursor:pointer;"><b><i> Calculate </i></b></button>
+         </div>
+         </div>
+         </div>
+         
+         
+         
+        </div>
+    </section>  
+    </body>
+
+<script>
+
+function fcalc()
+{
+   let fcf = document.getElementById('fv1').value;
+   let fg = document.getElementById('fv2').value;
+   let y = document.getElementById('fv3').value;
+   let r = document.getElementById('fv4').value;
+   let m = document.getElementById('fv5').value;
+   let p = document.getElementById('fv6').value;
+   let eps = document.getElementById('fv7').value;
+   
+   fcf=parseFloat(fcf);
+   fg=parseFloat(fg);
+   y=parseFloat(y);
+   r=parseFloat(r);
+   m=parseFloat(m);
+   p=parseFloat(p);
+   eps=parseFloat(eps);
+
+  let sh=p/eps;
+  fg=fg/100;
+  r=r/100;
+  let i=1;
+  let n=0;
+  let mct = 0;
+  let u = 0;
+  
+   while(i<=y)
+    {   fcf=(fcf*(1+fg));
+        u=fcf/Math.pow((1+r),i);
+        n=n+u;
+        i++;
+    }
+
+  mct=fcf*m;   
+  let b=mct/Math.pow((1+r),y);
+  let k=b+n;
+  let sp=k/sh;
+  
+   document.getElementById('fshow1').value = n.toFixed(2);
+   document.getElementById('fshow2').value = k.toFixed(2);
+   document.getElementById('fshow3').value = sp.toFixed(2);
+   
+}
+
+
+ function scalc()
+{
+   let fp = document.getElementById('sv1').value;
+   let y = document.getElementById('sv2').value;
+   let r = document.getElementById('sv3').value;
+   let pe = document.getElementById('sv4').value;
+   let qp = document.getElementById('sv5').value;
+   let eps = document.getElementById('sv6').value;
+   
+
+   fp=parseFloat(fp);
+   y=parseFloat(y);
+   r=parseFloat(r);
+   pe=parseFloat(pe);
+   qp=parseFloat(qp);
+   eps=parseFloat(eps);
+
+  let sh=qp/eps;
+  r=1+(r/100);
+
+  let u=fp/Math.pow(r,y);;
+   u /= sh;
+   u *= pe;
+  
+   document.getElementById('sshow1').value = u.toFixed(2);  
+}
+
+function tcal()
+{  let p = document.getElementById('tv8').value;
+   let g = document.getElementById('tv9').value;
+   let y = document.getElementById('tv10').value;
+   let r = document.getElementById('tv11').value;
+   let m = document.getElementById('tv12').value;
+  
+   p=parseFloat(p);
+   g=parseFloat(g);
+   y=parseFloat(y);
+   r=parseFloat(r);
+   m=parseFloat(m);
+   
+   g=g/100;
+   r=r/100;
+
+    p = p*Math.pow((1+g),y);
+    
+    p=p/Math.pow((1+r),y);
+    
+   document.getElementById('tshow4').value = p.toFixed(2);
+   document.getElementById('tshow5').value = (p*m).toFixed(2);
+}
+
+function lcalc()
+{
+   let p = document.getElementById('lv1').value;
+   let pe = document.getElementById('lv2').value;
+   let y = document.getElementById('lv3').value;
+   let eps = document.getElementById('lv4').value;
+   let r = document.getElementById('lv5').value;
+   
+   
+   p=parseFloat(p);
+   pe=parseFloat(pe);
+   y=parseFloat(y);
+   eps=parseFloat(eps);
+   r=parseFloat(r);
+   
+   r/=100;
+   
+   p *= Math.pow((1+r),y);
+   let te = p/pe;
+   
+   te = te/eps;
+   
+   te = Math.pow(te,(1/y));
+   
+   te-=1;
+
+  
+ document.getElementById('lshow1').value=(te*100).toFixed(2);
+   
+}
+
+function cdal2(){
+    let p = document.getElementById('c1').value;
+    let f = document.getElementById('c2').value;
+    let y = document.getElementById('c3').value;
+    
+     p=parseFloat(p);
+     f=parseFloat(f);
+     y=parseFloat(y);
+     
+     let te = f/p;
+     te = Math.pow(te,(1/y));
+     te -= 1;
+     te *= 100;
+     
+     document.getElementById('cdshow').value = te.toFixed(2);
+}
+
+function caleps(){
+    let p = document.getElementById('ep1').value;
+    let f = document.getElementById('ep2').value;
+    let s = document.getElementById('ep3').value;
+    
+     p=parseFloat(p);
+     f=parseFloat(f);
+     s=parseFloat(s);
+     
+     let sh = f/s;
+     
+     document.getElementById('epshow').value = (p/sh).toFixed(2);
+}
+</script>
+
+</html>
