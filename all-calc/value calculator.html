@@ -623,31 +623,35 @@
       per = parseFloat(per);
       losper = parseFloat(losper);
 
-      let qty = 100,
-        curp = 100;
-      let tq = qty * (per / 100);
-      let total = curp * tq;
-      let avgp = curp,
-        prevp = curp;
-      losper = 1 - losper / 100;
+      if (per > 0 && per < 100 && losper < 100) {
+        let qty = 100,
+          curp = 100;
+        let tq = qty * (per / 100);
+        let total = curp * tq;
+        let avgp = curp,
+          prevp = curp;
+        losper = 1 - losper / 100;
 
-      while (tq * 2 <= qty) {
-        curp = losper * avgp;
-        tq += qty * (per / 100);
-        total += curp * (qty * (per / 100));
-        avgp = total / tq;
-        per *= 2;
+        while (tq * 2 < qty) {
+          curp = losper * avgp;
+          tq += qty * (per / 100);
+          total += curp * (qty * (per / 100));
+          avgp = total / tq;
+          per *= 2;
+        }
+
+        if (qty - tq) {
+          curp = losper * avgp;
+          total += curp * (qty - tq);
+          tq += qty - tq;
+          avgp = total / tq;
+          curp = losper * avgp;
+        }
+
+        show.value = ((curp / prevp - 1) * 100).toFixed(2);
+      } else {
+        show.value = 0;
       }
-
-      if (qty - tq) {
-        curp = losper * avgp;
-        total += curp * (qty - tq);
-        tq += qty - tq;
-        avgp = total / tq;
-        curp = losper * avgp;
-      }
-
-      show.value = ((curp / prevp - 1) * 100).toFixed(2);
     }
 
     function fcalc() {
@@ -667,7 +671,7 @@
       p = parseFloat(p);
       eps = parseFloat(eps);
 
-      let sh = p / eps;
+      let sh = p / eps || 1;
       fg = fg / 100;
       r = r / 100;
       let i = 1;
@@ -707,7 +711,7 @@
       qp = parseFloat(qp);
       eps = parseFloat(eps);
 
-      let sh = qp / eps;
+      let sh = qp / eps || 1;
       r = 1 + r / 100;
 
       let u = fp / Math.pow(r, y);
@@ -749,9 +753,9 @@
       let r = document.getElementById("lv5").value;
 
       p = parseFloat(p);
-      pe = parseFloat(pe);
-      y = parseFloat(y);
-      eps = parseFloat(eps);
+      pe = parseFloat(pe) || 1;
+      y = parseFloat(y) || 1;
+      eps = parseFloat(eps) || 1;
       r = parseFloat(r);
 
       r /= 100;
@@ -773,9 +777,9 @@
       let f = document.getElementById("c2").value;
       let y = document.getElementById("c3").value;
 
-      p = parseFloat(p);
+      p = parseFloat(p) || 1;
       f = parseFloat(f);
-      y = parseFloat(y);
+      y = parseFloat(y) || 1;
 
       let te = f / p;
       te = Math.pow(te, 1 / y);
@@ -791,8 +795,8 @@
       let s = document.getElementById("ep3").value;
 
       p = parseFloat(p);
-      f = parseFloat(f);
-      s = parseFloat(s);
+      f = parseFloat(f) || 1;
+      s = parseFloat(s) || 1;
 
       let sh = f / s;
 
